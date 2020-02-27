@@ -93,6 +93,34 @@
           }
         }
       }
+    },
+    "styled-components-lib": {
+      "root": "libs/styled-components-lib",
+      "sourceRoot": "libs/styled-components-lib/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "libs/styled-components-lib/.eslintrc",
+            "tsConfig": [
+              "libs/styled-components-lib/tsconfig.lib.json",
+              "libs/styled-components-lib/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/styled-components-lib/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/styled-components-lib/jest.config.js",
+            "tsConfig": "libs/styled-components-lib/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

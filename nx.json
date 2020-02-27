@@ -17,6 +17,9 @@
     "next-hello-world-e2e": {
       "tags": [],
       "implicitDependencies": ["next-hello-world"]
+    },
+    "styled-components-lib": {
+      "tags": []
     }
   }
 }
