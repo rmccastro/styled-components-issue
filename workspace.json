@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "projects": {
+    "next-hello-world": {
+      "root": "apps/next-hello-world",
+      "sourceRoot": "apps/next-hello-world",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/next:build",
+          "options": {
+            "root": "apps/next-hello-world",
+            "outputPath": "dist/apps/next-hello-world"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/next:dev-server",
+          "options": {
+            "buildTarget": "next-hello-world:build",
+            "dev": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "next-hello-world:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "builder": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "next-hello-world:build:production"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/next-hello-world/.eslintrc",
+            "tsConfig": [
+              "apps/next-hello-world/tsconfig.json",
+              "apps/next-hello-world/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/next-hello-world/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/next-hello-world/jest.config.js",
+            "tsConfig": "apps/next-hello-world/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "next-hello-world-e2e": {
+      "root": "apps/next-hello-world-e2e",
+      "sourceRoot": "apps/next-hello-world-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/next-hello-world-e2e/cypress.json",
+            "tsConfig": "apps/next-hello-world-e2e/tsconfig.e2e.json",
+            "devServerTarget": "next-hello-world:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "next-hello-world:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/next-hello-world-e2e/.eslintrc",
+            "tsConfig": ["apps/next-hello-world-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/next-hello-world-e2e/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/next"
+  },
+  "schematics": {
+    "@nrwl/workspace": {
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/cypress": {
+      "cypress-project": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/react": {
+      "application": {
+        "linter": "eslint",
+        "babel": true
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "style": "styled-components",
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/web": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/node": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nx-plugin": {
+      "plugin": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nest": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/express": {
+      "application": {
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "next-hello-world"
+}

@@ -1,0 +1,22 @@
+{
+  "npmScope": "styled-components-issue",
+  "implicitDependencies": {
+    "workspace.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "next-hello-world": {
+      "tags": []
+    },
+    "next-hello-world-e2e": {
+      "tags": [],
+      "implicitDependencies": ["next-hello-world"]
+    }
+  }
+}
